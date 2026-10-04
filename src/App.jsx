@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Tabs } from './components/Tabs';
 
 export const App = () => {
@@ -20,15 +20,19 @@ export const App = () => {
     },
   ];
 
-  const activeTabId = 'tab-1';
+  const [activeTabId, setActiveTabId] = useState(tabs[0].id);
 
   const activeTab = tabs.find(tab => tab.id === activeTabId) || tabs[0];
 
   return (
-    <>
-      <h1>Selected tab is {activeTab.title}</h1>
+    <div>
+      <h1 className="title">Selected tab is {activeTab.title}</h1>
 
-      <Tabs tabs={tabs} activeTabId={activeTabId} />
-    </>
+      <Tabs
+        tabs={tabs}
+        activeTabId={activeTabId}
+        onTabSelected={setActiveTabId}
+      />
+    </div>
   );
 };
